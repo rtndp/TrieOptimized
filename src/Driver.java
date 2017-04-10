@@ -12,16 +12,25 @@ public class Driver {
         to.insert("comfort");
         to.insert("cash");
         to.insert("cam");
+        to.insert("cat");
+        to.insert("dog");
+        to.insert("dam");
+        to.insert("damp");
+        to.insert("dig");
+        to.insert("coal");
 
 
-        /*System.out.println(to.search("ca"));
+
+        /*
+        System.out.println(to.search("ca"));
         System.out.println(to.search("car"));
         System.out.println(to.search("cars"));
         System.out.println(to.search("card"));
         System.out.println(to.search("cards"));
         System.out.println(to.search("CARDS"));
         System.out.println(to.search("Cards"));
-        System.out.println(to.search("Cardz"));*/
+        System.out.println(to.search("Cardz"));
+        */
 
         to.walk();
     }

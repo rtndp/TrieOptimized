@@ -1,4 +1,4 @@
-
+import java.util.Stack;
 
 class Node {
     char c;
@@ -21,6 +21,11 @@ public class TrieOptimized {
         root = new Node();
     }
 
+    /**
+     * @param children
+     * @param character
+     * @return
+     */
     private boolean contains(Node[] children, char character) {
         if (children[character - 'a'] != null && children[character - 'a'].c == character)
             return true;
@@ -28,10 +33,17 @@ public class TrieOptimized {
         return false;
     }
 
+    /**
+     * @param c
+     * @return
+     */
     private int index(char c) {
         return c - 'a';
     }
 
+    /**
+     * @param word
+     */
     public void insert(String word) {
         Node[] children = root.children;
 
@@ -57,6 +69,10 @@ public class TrieOptimized {
 
     }
 
+    /**
+     * @param key
+     * @return
+     */
     public boolean search(String key) {
         Node n = searchHelper(key);
 
@@ -68,6 +84,10 @@ public class TrieOptimized {
 
     }
 
+    /**
+     * @param key
+     * @return
+     */
     private Node searchHelper(String key) {
 
         Node[] children = root.children;
@@ -93,12 +113,18 @@ public class TrieOptimized {
             return null;
     }
 
-    //Implement a dfs walk
+    /**
+     *
+     */
     public void walk() {
         dfsWalkRecursiveHelper(root, new StringBuilder());
-        dfsWalkIterativeHelper(root);
+        dfsWalkIterativeHelper(root, new Stack<Node>());
     }
 
+    /**
+     * @param node
+     * @param s
+     */
     private void dfsWalkRecursiveHelper(Node node, StringBuilder s) {
         if (node.isLeaf) {
             System.out.println(s.toString());
@@ -106,8 +132,8 @@ public class TrieOptimized {
 
 
         for (int i = 0; i < node.children.length; i++) {
-            if (node.children[i] != null) {
-                Node n = node.children[i];
+            Node n = node.children[i];
+            if (n != null) {
                 char c = n.c;
                 s.append(c);
                 dfsWalkRecursiveHelper(n, s);
@@ -117,8 +143,16 @@ public class TrieOptimized {
     }
 
 
-    private void dfsWalkIterativeHelper(Node node) {
+    /**
+     * @param node
+     */
+    private void dfsWalkIterativeHelper(Node node, Stack<Node> stack) {
 
+        for (int i = 0; i < node.children.length; i++) {
+            Node n = node.children[i];
+            if (n != null)
+                stack.push(n);
+        }
     }
 
 }
