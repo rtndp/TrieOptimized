@@ -93,5 +93,6 @@ public class TrieOptimized {
             return null;
     }
 
+    //Implement a dfs walk
 
 }
