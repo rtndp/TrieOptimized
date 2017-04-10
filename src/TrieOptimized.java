@@ -94,5 +94,31 @@ public class TrieOptimized {
     }
 
     //Implement a dfs walk
+    public void walk() {
+        dfsWalkRecursiveHelper(root, new StringBuilder());
+        dfsWalkIterativeHelper(root);
+    }
+
+    private void dfsWalkRecursiveHelper(Node node, StringBuilder s) {
+        if (node.isLeaf) {
+            System.out.println(s.toString());
+        }
+
+
+        for (int i = 0; i < node.children.length; i++) {
+            if (node.children[i] != null) {
+                Node n = node.children[i];
+                char c = n.c;
+                s.append(c);
+                dfsWalkRecursiveHelper(n, s);
+                s.deleteCharAt(s.length() - 1);
+            }
+        }
+    }
+
+
+    private void dfsWalkIterativeHelper(Node node) {
+
+    }
 
 }
