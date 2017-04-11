@@ -5,6 +5,9 @@ class Node {
     Node[] children = new Node[26];
     boolean isLeaf;
 
+    //You can store a contact object instead of a String
+    String word;
+
     public Node() {
     }
 
@@ -64,6 +67,7 @@ public class TrieOptimized {
 
             if (i == arr.length - 1) {
                 n.isLeaf = true;
+                n.word = word;
             }
         }
 
@@ -114,30 +118,27 @@ public class TrieOptimized {
     }
 
     /**
-     *
+     * A public method to walk the trie
      */
     public void walk() {
-        dfsWalkRecursiveHelper(root, new StringBuilder());
-        dfsWalkIterativeHelper(root, new Stack<Node>());
+        dfsWalkRecursiveHelper(root);
+        System.out.println("");
+        dfsWalkIterativeHelper(root);
     }
 
     /**
      * @param node
-     * @param s
      */
-    private void dfsWalkRecursiveHelper(Node node, StringBuilder s) {
+    private void dfsWalkRecursiveHelper(Node node) {
         if (node.isLeaf) {
-            System.out.println(s.toString());
+            System.out.println(node.word);
         }
 
 
         for (int i = 0; i < node.children.length; i++) {
             Node n = node.children[i];
             if (n != null) {
-                char c = n.c;
-                s.append(c);
-                dfsWalkRecursiveHelper(n, s);
-                s.deleteCharAt(s.length() - 1);
+                dfsWalkRecursiveHelper(n);
             }
         }
     }
@@ -146,12 +147,31 @@ public class TrieOptimized {
     /**
      * @param node
      */
-    private void dfsWalkIterativeHelper(Node node, Stack<Node> stack) {
+    private void dfsWalkIterativeHelper(Node node) {
 
-        for (int i = 0; i < node.children.length; i++) {
+        Stack<Node> stack = new Stack<Node>();
+
+        for (int i = node.children.length - 1; i >= 0; i--) {
             Node n = node.children[i];
             if (n != null)
                 stack.push(n);
+        }
+
+
+        while (!stack.isEmpty()) {
+            Node t = stack.pop();
+
+
+            if (t.isLeaf) {
+                System.out.println(t.word);
+            }
+
+            for (int i = t.children.length - 1; i >= 0; i--) {
+                Node c = t.children[i];
+                if (c != null) {
+                    stack.push(c);
+                }
+            }
         }
     }
 
